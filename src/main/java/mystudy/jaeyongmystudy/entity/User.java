@@ -6,10 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
-
+@Entity
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class User {
 
@@ -20,12 +19,13 @@ public class User {
 
     private String password;
 
-    private String rank;
+    private String user_rank;
 
     @Builder
-    public User(String name, String rank, String password) {
+    public User(Long userId, String name, String user_rank, String password) {
+        this.userId = userId;
         this.name = name;
-        this.rank = rank;
+        this.user_rank = user_rank;
         this.password = password;
     }
 }
