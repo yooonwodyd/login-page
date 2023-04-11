@@ -1,6 +1,7 @@
 package mystudy.jaeyongmystudy.controller;
 
 import mystudy.jaeyongmystudy.entity.User;
+import mystudy.jaeyongmystudy.service.PostsService;
 import mystudy.jaeyongmystudy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +14,13 @@ public class HomeController {
 
 
     private final UserService userService;
+    private final PostsService postsService;
 
     @Autowired
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService, PostsService postsService) {
         this.userService = userService;
+        this.postsService = postsService;
     }
-
 
     @GetMapping("/")
     public String home(
@@ -31,7 +33,8 @@ public class HomeController {
         else {
 
             model.addAttribute("loginUser",loginUser);
-            return "home";
+            model.addAttribute("list",postsService.postsList());
+            return "loginhome";
         }
     }
 }

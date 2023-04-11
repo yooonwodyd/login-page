@@ -29,17 +29,22 @@ public class UserService {
         return newUser;
     }
 
-    public User login(UserLoginForm form){
+    public User login(UserLoginForm form) {
 
         User user = userRepository.findByName(form.getName()).orElse(null);
+        if (user == null) {
+            return null;
+        }
 
-
-        if (user.getPassword().equals(form.getPassword())) {
+        else if(user.getPassword().equals(form.getPassword())) {
             return user;
         }
-        return null;
+        else {
+            return null;
+        }
 
     }
+
 }
 
 
