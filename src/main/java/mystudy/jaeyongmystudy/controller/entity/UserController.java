@@ -55,7 +55,6 @@ public class UserController {
         session.setAttribute("LOGIN_USER", loginUser);
         System.out.println("세션에 보냄");
         return "redirect:/";
-
     }
 
 
