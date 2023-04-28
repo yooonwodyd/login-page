@@ -1,30 +1,29 @@
 package mystudy.jaeyongmystudy.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
-    private String title;
-    private String content;
-    private String author;
-    @Builder
-    public Posts(Long postId, String title, String content, String author) {
+    @Setter private String title;
+    @Setter private String content;
+    // @Setter private String author;
+    @Setter @ManyToOne(optional = false) private User user;
+
+    public Posts(Long postId, String title, String content, User user) {
         this.postId = postId;
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.user = user;
+    }
+
+    public static Posts of(Long postId, String title, String content, User user) {
+        return new Posts(postId,title,content,user);
     }
 }

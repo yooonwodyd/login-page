@@ -19,7 +19,7 @@ public class UserService {
 
 
     public User create(User user) {
-        User newUser = new User(user.getUserId(),user.getName(),user.getUser_rank(),user.getPassword());
+        User newUser = User.of(user.getUserId(),user.getName(),user.getUser_rank(),user.getPassword());
 
         userRepository.save(newUser);
         return newUser;

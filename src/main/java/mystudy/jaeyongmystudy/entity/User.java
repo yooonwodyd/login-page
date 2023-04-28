@@ -14,26 +14,34 @@ import java.util.stream.Collectors;
 
 @Entity
 @Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    private String name;
 
-    private String password;
+    @Setter private String name;
 
-    private String user_rank;
+    @Setter private String password;
+
+    @Setter private String user_rank;
 
 
-    public User(Long userId, String name, String user_rank, String password) {
+
+
+    protected User(Long userId, String name, String user_rank, String password) {
         this.userId = userId;
         this.name = name;
         this.user_rank = user_rank;
         this.password = password;
     }
+    protected User() {}
+
+    public static User of(Long userId, String name, String user_rank, String password) {
+        return new User(userId,name,user_rank,password);
+    }
+
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
