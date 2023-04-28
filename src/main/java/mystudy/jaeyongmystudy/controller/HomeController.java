@@ -29,19 +29,9 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(
-            @SessionAttribute(name = "LOGIN_USER",required = false)User loginUser, Model model)
-    {
-        if(loginUser == null){
+    public String home(){
 
             return "home";
-        }
-        else {
-
-            model.addAttribute("loginUser",loginUser);
-            model.addAttribute("list",postsService.postsList());
-            return "loginhome";
-        }
     }
     @GetMapping("/kakao")
     public String kakaoLogin(
@@ -49,7 +39,12 @@ public class HomeController {
         System.out.println("code:" + code);
         String access_Token = kakaoLoginService.getAccessToken(code);
         System.out.println("###access_Token#### : " + access_Token);
-        
-        return "loginhome";
+
+
+        return "home";
+    }
+    @GetMapping("logintest")
+    public String login(){
+        return "logintest";
     }
 }

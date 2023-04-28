@@ -19,11 +19,7 @@ public class UserService {
 
 
     public User create(User user) {
-        User newUser = User.builder()
-                .name(user.getName())
-                .password(user.getPassword())
-                .user_rank("1")
-                .build();
+        User newUser = new User(user.getUserId(),user.getName(),user.getUser_rank(),user.getPassword());
 
         userRepository.save(newUser);
         return newUser;
